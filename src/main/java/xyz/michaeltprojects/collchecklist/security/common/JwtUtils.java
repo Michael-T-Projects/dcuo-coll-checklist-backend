@@ -16,7 +16,7 @@ public class JwtUtils {
     @Value("${coll-checklist.app.jwt-secret")
     private String jwtSecret;
 
-    @Value("${coll-checklist.app.jwt-expiration-ms")
+    @Value("${coll-checklist.app.jwt-expiration-ms}")
     private long jwtExpirationMs;
 
     public String generateJwtToken(Authentication authentication) {
