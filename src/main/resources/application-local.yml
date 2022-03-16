@@ -3,3 +3,8 @@ spring:
     username: root
     password: cannotguessthis
     url: jdbc:mysql://127.0.0.1/coll-check-list-test-db
+
+coll-checklist:
+  app:
+    jwt-secret: supersecretkey
+    jwt-expiration-ms: 86400000
