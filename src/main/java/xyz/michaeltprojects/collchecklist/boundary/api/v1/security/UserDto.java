@@ -1,4 +1,4 @@
-package xyz.michaeltprojects.collchecklist.api.v1.security;
+package xyz.michaeltprojects.collchecklist.boundary.api.v1.security;
 
 import lombok.*;
 
