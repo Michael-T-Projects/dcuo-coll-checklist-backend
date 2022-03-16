@@ -1,4 +1,4 @@
-package xyz.michaeltprojects.collchecklist.api.v1.security;
+package xyz.michaeltprojects.collchecklist.boundary.api.v1.security;
 
 import lombok.*;
 
@@ -11,7 +11,11 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @Getter
 @Setter
-public class LoginRequestDto {
+public class SignupRequestDto {
+
+    @NotBlank
+    @Size(min = 3, max = 30)
+    private String username;
 
     @NotBlank
     @Size(min = 6, max = 50)
