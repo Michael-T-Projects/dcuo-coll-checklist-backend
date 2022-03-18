@@ -1,9 +1,9 @@
 package xyz.michaeltprojects.collchecklist.boundary.api.v1.security;
 
 import lombok.*;
-import xyz.michaeltprojects.collchecklist.security.persistence.ERole;
 
-import java.util.UUID;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Data
 @NoArgsConstructor
@@ -12,8 +12,10 @@ import java.util.UUID;
 @Setter
 public class RoleDto {
 
-    private UUID id;
+    private long id;
 
-    private ERole name;
+    @NotBlank
+    @Size(min = 2, max = 20)
+    private String name;
 
 }

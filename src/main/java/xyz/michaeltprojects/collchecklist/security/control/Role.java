@@ -1,20 +1,21 @@
 package xyz.michaeltprojects.collchecklist.security.control;
 
 import lombok.*;
-import xyz.michaeltprojects.collchecklist.security.persistence.ERole;
 
-import java.util.UUID;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@Builder
 public class Role {
 
-    private UUID id;
+    private long id;
 
-    private ERole name;
+    @NotBlank
+    @Size(min = 2, max = 20)
+    private String name;
 
 }

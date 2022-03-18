@@ -1,4 +1,5 @@
-coll-checklist:
+collChecklist:
   app:
-    jwt-secret: ${APP_JWT_SECRET}
-    jwt-expiration-ms: 86400000
+    jwtSecret: ${APP_JWT_SECRET}
+    jwtExpirationMs: 86400000
+    jwtAuthoritiesKey: roles

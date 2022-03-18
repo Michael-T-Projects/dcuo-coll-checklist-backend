@@ -9,9 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "users")
@@ -22,24 +20,32 @@ import java.util.UUID;
 public class UserEntity {
 
     @Id
-    @GeneratedValue
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, unique = true)
+    private long id;
 
     @NotBlank
-    @Size(min = 3, max = 30)
+    @Size(min = 2, max = 30)
+    @Column(nullable = false, unique = true)
     private String username;
+
+    @NotBlank
+    @Size(max = 120)
+    @Column(nullable = false)
+    private String password;
 
     @NotBlank
     @Size(min = 6, max = 50)
     @Email
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @NotBlank
-    @Size(max = 120)
-    private String password;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<RoleEntity> roles = new HashSet<>();
+    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE, CascadeType.REFRESH })
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<RoleEntity> roles;
 
 }

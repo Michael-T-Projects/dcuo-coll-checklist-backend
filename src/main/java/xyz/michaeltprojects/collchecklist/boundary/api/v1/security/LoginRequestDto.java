@@ -2,7 +2,6 @@ package xyz.michaeltprojects.collchecklist.boundary.api.v1.security;
 
 import lombok.*;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -14,9 +13,8 @@ import javax.validation.constraints.Size;
 public class LoginRequestDto {
 
     @NotBlank
-    @Size(min = 6, max = 50)
-    @Email
-    private String email;
+    @Size(min = 2, max = 30)
+    private String username;
 
     @NotBlank
     @Size(max = 120)

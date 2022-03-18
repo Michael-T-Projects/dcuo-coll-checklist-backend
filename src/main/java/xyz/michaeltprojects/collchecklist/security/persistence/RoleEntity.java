@@ -6,7 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.UUID;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "roles")
@@ -17,11 +18,13 @@ import java.util.UUID;
 public class RoleEntity {
 
     @Id
-    @GeneratedValue
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, unique = true)
+    private long id;
 
-    @Enumerated(EnumType.STRING)
-    @Column(length = 20)
-    private ERole name;
+    @NotBlank
+    @Size(min = 2, max = 20)
+    @Column(nullable = false)
+    private String name;
 
 }

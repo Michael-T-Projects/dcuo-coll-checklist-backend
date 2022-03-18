@@ -14,16 +14,16 @@ import javax.validation.constraints.Size;
 public class SignupRequestDto {
 
     @NotBlank
-    @Size(min = 3, max = 30)
+    @Size(min = 2, max = 30)
     private String username;
+
+    @NotBlank
+    @Size(max = 120)
+    private String password;
 
     @NotBlank
     @Size(min = 6, max = 50)
     @Email
     private String email;
-
-    @NotBlank
-    @Size(max = 120)
-    private String password;
 
 }

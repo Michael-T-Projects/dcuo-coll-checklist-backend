@@ -8,6 +8,6 @@ interface UserDtoMapper {
 
     UserDto map(User user);
     User map(UserDto user);
-    User map(SignupRequestDto signupRequestDto);
+    User map(SignupRequestDto signupRequest);
 
 }
