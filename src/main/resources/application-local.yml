@@ -4,7 +4,8 @@ spring:
     password: cannotguessthis
     url: jdbc:mysql://127.0.0.1/coll-check-list-test-db
 
-coll-checklist:
+collChecklist:
   app:
-    jwt-secret: supersecretkey
-    jwt-expiration-ms: 86400000
+    jwtSecret: supersecretkey
+    jwtExpirationMs: 86400000
+    jwtAuthoritiesKey: roles
