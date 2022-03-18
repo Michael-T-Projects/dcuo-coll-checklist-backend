@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Collection;
 
 @Data
 @NoArgsConstructor
@@ -31,5 +33,9 @@ public class CollectionSaveRequestDto {
     @NotNull
     @JsonProperty("category_id")
     private Long categoryId;
+
+    @NotEmpty
+    @JsonProperty("collection_parts")
+    private Collection<String> collectionParts;
 
 }

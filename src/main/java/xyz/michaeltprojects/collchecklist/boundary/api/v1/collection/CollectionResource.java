@@ -11,6 +11,7 @@ import xyz.michaeltprojects.collchecklist.control.category.CategoryService;
 import xyz.michaeltprojects.collchecklist.control.collection.CollectionService;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -63,6 +64,15 @@ public class CollectionResource {
             return ResponseEntity.notFound().build();
         }
 
+        Collection<CollectionPartDto> collectionParts = new ArrayList<>();
+
+        for (String collectionPart : collectionSaveRequest.getCollectionParts()) {
+            collectionParts.add(mapper.map(service.save(mapper.map(new CollectionPartDto(
+                    null,
+                    collectionPart
+            )))));
+        }
+
         CollectionDto mappedCollection = new CollectionDto(
                 null,
                 collectionSaveRequest.getName(),
@@ -70,7 +80,8 @@ public class CollectionResource {
                 collectionSaveRequest.getLocation(),
                 collectionSaveRequest.getEvent(),
                 collectionSaveRequest.getEpisode(),
-                category
+                category,
+                collectionParts
         );
 
         return ResponseEntity.ok(mapper.map(service.save(mapper.map(mappedCollection))));
