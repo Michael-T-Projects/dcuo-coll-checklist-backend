@@ -12,4 +12,6 @@ public interface CollectionService {
 
     Collection save(Collection collection);
 
+    CollectionPart save(CollectionPart collectionPart);
+
 }

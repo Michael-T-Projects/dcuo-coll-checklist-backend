@@ -4,6 +4,8 @@ import lombok.*;
 import xyz.michaeltprojects.collchecklist.control.category.Category;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
@@ -30,5 +32,9 @@ public class Collection {
     private String episode;
 
     private Category category;
+
+    @NotEmpty
+    @NotNull
+    private java.util.Collection<CollectionPart> collectionParts;
 
 }
