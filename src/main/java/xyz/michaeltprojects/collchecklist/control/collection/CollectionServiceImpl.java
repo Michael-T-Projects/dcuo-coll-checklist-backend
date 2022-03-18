@@ -2,6 +2,7 @@ package xyz.michaeltprojects.collchecklist.control.collection;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import xyz.michaeltprojects.collchecklist.persistence.collection.CollectionPartRepository;
 import xyz.michaeltprojects.collchecklist.persistence.collection.CollectionRepository;
 
 import java.util.stream.Collectors;
@@ -11,6 +12,7 @@ import java.util.stream.Collectors;
 public class CollectionServiceImpl implements CollectionService {
 
     private final CollectionRepository repository;
+    private final CollectionPartRepository collectionPartRepository;
     private final CollectionEntityMapper mapper;
 
     @Override
@@ -37,5 +39,11 @@ public class CollectionServiceImpl implements CollectionService {
     public Collection save(Collection collection) {
         collection.setId(repository.save(mapper.map(collection)).getId());
         return collection;
+    }
+
+    @Override
+    public CollectionPart save(CollectionPart collectionPart) {
+        collectionPart.setId(collectionPartRepository.save(mapper.map(collectionPart)).getId());
+        return collectionPart;
     }
 }

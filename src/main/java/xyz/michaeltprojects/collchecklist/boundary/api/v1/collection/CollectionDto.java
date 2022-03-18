@@ -1,10 +1,14 @@
 package xyz.michaeltprojects.collchecklist.boundary.api.v1.collection;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import xyz.michaeltprojects.collchecklist.boundary.api.v1.category.CategoryDto;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Collection;
 
 @Data
 @NoArgsConstructor
@@ -30,5 +34,10 @@ public class CollectionDto {
     private String episode;
 
     private CategoryDto category;
+
+    @JsonProperty("collection_parts")
+    @NotEmpty
+    @NotNull
+    private Collection<CollectionPartDto> collectionParts;
 
 }
