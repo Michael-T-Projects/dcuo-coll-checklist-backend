@@ -1,9 +1,10 @@
-package xyz.michaeltprojects.collchecklist.control.collection;
+package xyz.michaeltprojects.collchecklist.boundary.api.v1.collection;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-import xyz.michaeltprojects.collchecklist.control.category.Category;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
@@ -11,9 +12,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Collection {
-
-    private long id;
+public class CollectionSaveRequestDto {
 
     @NotBlank
     @Size(min = 2, max = 30)
@@ -29,6 +28,8 @@ public class Collection {
 
     private String episode;
 
-    private Category category;
+    @NotNull
+    @JsonProperty("category_id")
+    private Long categoryId;
 
 }

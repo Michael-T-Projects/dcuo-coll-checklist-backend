@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import xyz.michaeltprojects.collchecklist.control.category.Category;
 
 @Mapper(componentModel = "spring")
-interface CategoryDtoMapper {
+public interface CategoryDtoMapper {
 
     CategoryDto map(Category category);
     Category map(CategoryDto category);

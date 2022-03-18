@@ -12,4 +12,6 @@ public interface CollectionRepository extends JpaRepository<CollectionEntity, Lo
 
     Collection<CollectionEntity> findByNameContaining(String name);
 
+    Collection<CollectionEntity> findByCategoryIdAndNameContaining(long categoryId, String name);
+
 }

@@ -14,6 +14,11 @@ public class CollectionServiceImpl implements CollectionService {
     private final CollectionEntityMapper mapper;
 
     @Override
+    public java.util.Collection<Collection> findAll() {
+        return repository.findAll().stream().map(mapper::map).collect(Collectors.toList());
+    }
+
+    @Override
     public java.util.Collection<Collection> findByCategoryId(long categoryId) {
         return repository.findByCategoryId(categoryId).stream().map(mapper::map).collect(Collectors.toList());
     }
@@ -21,6 +26,11 @@ public class CollectionServiceImpl implements CollectionService {
     @Override
     public java.util.Collection<Collection> findByNameContaining(String name) {
         return repository.findByNameContaining(name).stream().map(mapper::map).collect(Collectors.toList());
+    }
+
+    @Override
+    public java.util.Collection<Collection> findByCategoryIdAndNameContaining(long categoryId, String name) {
+        return repository.findByCategoryIdAndNameContaining(categoryId, name).stream().map(mapper::map).collect(Collectors.toList());
     }
 
     @Override

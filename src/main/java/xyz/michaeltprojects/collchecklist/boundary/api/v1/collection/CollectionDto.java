@@ -1,7 +1,7 @@
-package xyz.michaeltprojects.collchecklist.control.collection;
+package xyz.michaeltprojects.collchecklist.boundary.api.v1.collection;
 
 import lombok.*;
-import xyz.michaeltprojects.collchecklist.control.category.Category;
+import xyz.michaeltprojects.collchecklist.boundary.api.v1.category.CategoryDto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -11,9 +11,9 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Collection {
+public class CollectionDto {
 
-    private long id;
+    private Long id;
 
     @NotBlank
     @Size(min = 2, max = 30)
@@ -29,6 +29,6 @@ public class Collection {
 
     private String episode;
 
-    private Category category;
+    private CategoryDto category;
 
 }

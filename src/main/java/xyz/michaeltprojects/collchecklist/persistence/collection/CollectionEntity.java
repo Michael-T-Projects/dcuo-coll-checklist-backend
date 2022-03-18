@@ -1,15 +1,14 @@
 package xyz.michaeltprojects.collchecklist.persistence.collection;
 
 import lombok.*;
+import xyz.michaeltprojects.collchecklist.persistence.category.CategoryEntity;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-@Data
+@Entity
+@Table(name = "collections")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -39,5 +38,8 @@ public class CollectionEntity {
 
     @Column
     private String episode;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private CategoryEntity category;
 
 }

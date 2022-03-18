@@ -40,4 +40,14 @@ public class CategoryServiceImpl implements CategoryService {
         return repository.findAll().stream().map(mapper::map).collect(Collectors.toList());
     }
 
+    @Override
+    public boolean existsById(long id) {
+        return repository.existsById(id);
+    }
+
+    @Override
+    public Category findById(long id) {
+        return mapper.map(repository.findById(id).orElse(null));
+    }
+
 }
