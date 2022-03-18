@@ -3,6 +3,7 @@ package xyz.michaeltprojects.collchecklist.security.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -42,8 +43,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers(
+                        HttpMethod.POST,
                         "/api/v1/auth/authenticate",
                         "/api/v1/auth/signup"
+                ).permitAll()
+                .antMatchers(
+                        HttpMethod.GET,
+                        "/api/v1/collections",
+                        "/api/v1/collections/**"
                 ).permitAll()
                 .anyRequest().authenticated()
                 .and()

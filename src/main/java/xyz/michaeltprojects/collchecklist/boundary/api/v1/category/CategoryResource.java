@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import xyz.michaeltprojects.collchecklist.control.category.CategoryService;
+import xyz.michaeltprojects.collchecklist.control.category.CategoryServiceImpl;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CategoryResource {
 
-    private final CategoryService service;
+    private final CategoryServiceImpl service;
     private final CategoryDtoMapper mapper;
 
     private final static String DEFAULT_MEDIA_TYPE = MediaType.APPLICATION_JSON_VALUE;
