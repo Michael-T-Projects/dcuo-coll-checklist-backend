@@ -14,4 +14,20 @@ public interface CollectionService {
 
     CollectionPart save(CollectionPart collectionPart);
 
+    CollectionProgress save(CollectionProgress collectionProgress);
+
+    java.util.Collection<CollectionProgress> findByUserIdAndCollectionNameContaining(long userId, String collectionName);
+
+    CollectionProgress update(CollectionProgress collectionProgress);
+
+    Collection findById(long id);
+
+    CollectionProgress findByUserIdAndCollectionId(long userId, long collectionId);
+
+    CollectionProgress findCollectionProgressById(long id);
+
+    CollectionPart findCollectionPartById(long id);
+
+    boolean delete(long id);
+
 }

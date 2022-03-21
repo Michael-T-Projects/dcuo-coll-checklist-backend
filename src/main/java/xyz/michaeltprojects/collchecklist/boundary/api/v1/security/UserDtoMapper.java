@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import xyz.michaeltprojects.collchecklist.security.control.User;
 
 @Mapper(componentModel = "spring")
-interface UserDtoMapper {
+public interface UserDtoMapper {
 
     UserDto map(User user);
     User map(UserDto user);
