@@ -6,5 +6,6 @@ public interface UserService {
     User findByUsername(String username);
     Boolean existsByUsername(String username);
     Boolean existsByEmail(String email);
+    User findById(long id);
 
 }

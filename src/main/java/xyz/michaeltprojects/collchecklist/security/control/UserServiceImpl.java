@@ -70,4 +70,9 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         return repository.existsByEmail(email);
     }
 
+    @Override
+    public User findById(long id) {
+        return mapper.map(repository.findById(id).orElse(null));
+    }
+
 }
