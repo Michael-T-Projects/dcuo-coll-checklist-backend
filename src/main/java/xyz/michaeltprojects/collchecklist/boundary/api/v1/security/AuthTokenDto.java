@@ -9,6 +9,10 @@ import lombok.*;
 @Setter
 public class AuthTokenDto {
 
+    private String username;
+
+    private String email;
+
     private String token;
 
 }

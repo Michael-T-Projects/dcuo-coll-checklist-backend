@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import xyz.michaeltprojects.collchecklist.security.control.User;
 import xyz.michaeltprojects.collchecklist.security.control.UserService;
 import xyz.michaeltprojects.collchecklist.security.util.TokenProvider;
 import xyz.michaeltprojects.collchecklist.shared.MessageResponseDto;
@@ -41,7 +42,13 @@ public class AuthResource {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         final String token = jwtTokenUtil.generateToken(authentication);
 
-        return ResponseEntity.ok(new AuthTokenDto(token));
+        User user = userService.findByUsername(loginRequest.getUsername());
+
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        return ResponseEntity.ok(new AuthTokenDto(user.getUsername(), user.getEmail(), token));
     }
 
     @PostMapping(path = "/signup", consumes = DEFAULT_MEDIA_TYPE, produces = DEFAULT_MEDIA_TYPE)
