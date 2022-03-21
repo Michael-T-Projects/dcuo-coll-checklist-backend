@@ -14,4 +14,10 @@ public interface CollectionService {
 
     CollectionPart save(CollectionPart collectionPart);
 
+    CollectionProgress save(CollectionProgress collectionProgress);
+
+    CollectionProgress findByCollectionNameContaining(String collectionName);
+
+    CollectionProgress update(CollectionProgress collectionProgress);
+
 }
