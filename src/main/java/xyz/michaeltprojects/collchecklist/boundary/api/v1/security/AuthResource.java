@@ -19,6 +19,7 @@ import xyz.michaeltprojects.collchecklist.security.util.TokenProvider;
 import xyz.michaeltprojects.collchecklist.shared.MessageResponseDto;
 
 import javax.validation.Valid;
+import java.util.HashSet;
 import java.util.stream.Collectors;
 
 @RestController
@@ -43,7 +44,7 @@ public class AuthResource {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        UserDto userDto = new UserDto(user.getId(), user.getUsername(), null, user.getEmail(), user.getRoles().stream().map(Role::getName).collect(Collectors.toList()));
+        UserDto userDto = new UserDto(user.getId(), user.getUsername(), null, user.getEmail(), new HashSet<>(user.getRoles().stream().map(Role::getName).collect(Collectors.toList())));
 
         return ResponseEntity.ok(userDto);
     }

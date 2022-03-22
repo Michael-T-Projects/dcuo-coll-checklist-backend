@@ -7,6 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -31,6 +32,6 @@ public class UserDto {
     @Email
     private String email;
 
-    private List<String> roles;
+    private Set<String> roles;
 
 }
