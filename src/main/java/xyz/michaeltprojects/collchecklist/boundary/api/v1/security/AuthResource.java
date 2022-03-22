@@ -43,7 +43,9 @@ public class AuthResource {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        return ResponseEntity.ok(mapper.map(user));
+        UserDto userDto = new UserDto(user.getId(), user.getUsername(), null, user.getEmail(), user.getRoles().stream().map(Role::getName).collect(Collectors.toList()));
+
+        return ResponseEntity.ok(userDto);
     }
 
     @PostMapping(path = "/authenticate", consumes = DEFAULT_MEDIA_TYPE, produces = DEFAULT_MEDIA_TYPE)

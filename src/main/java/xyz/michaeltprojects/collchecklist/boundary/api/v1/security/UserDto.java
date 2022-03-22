@@ -6,7 +6,7 @@ import lombok.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Set;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -31,6 +31,6 @@ public class UserDto {
     @Email
     private String email;
 
-    private Set<RoleDto> roles;
+    private List<String> roles;
 
 }
