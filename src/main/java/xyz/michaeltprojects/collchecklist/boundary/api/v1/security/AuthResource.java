@@ -10,6 +10,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import xyz.michaeltprojects.collchecklist.security.control.Role;
 import xyz.michaeltprojects.collchecklist.security.control.User;
@@ -32,6 +33,18 @@ public class AuthResource {
     private final TokenProvider jwtTokenUtil;
     private final UserService userService;
     private final UserDtoMapper mapper;
+
+    @GetMapping(path = "/me", produces = DEFAULT_MEDIA_TYPE)
+    public ResponseEntity<?> authMe() throws AuthenticationException {
+        UserDetails currentUserDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userService.findByUsername(currentUserDetails.getUsername());
+
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        return ResponseEntity.ok(mapper.map(user));
+    }
 
     @PostMapping(path = "/authenticate", consumes = DEFAULT_MEDIA_TYPE, produces = DEFAULT_MEDIA_TYPE)
     public ResponseEntity<?> generateToken(@Valid @RequestBody final LoginRequestDto loginRequest) throws AuthenticationException {
