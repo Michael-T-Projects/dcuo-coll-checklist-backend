@@ -50,7 +50,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         HttpMethod.GET,
                         "/api/v1/collections",
-                        "/api/v1/collections/**"
+                        "/api/v1/collections/**",
+                        "/api/v1/categories"
                 ).permitAll()
                 .anyRequest().authenticated()
                 .and()
