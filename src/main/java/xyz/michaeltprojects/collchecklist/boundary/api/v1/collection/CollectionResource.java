@@ -79,7 +79,7 @@ public class CollectionResource {
 
         Map<String, Object> response = new HashMap<>();
 
-        response.put("collections", collections);
+        response.put("items", collections);
         response.put("current_page", currentPage);
         response.put("total_pages", totalPages);
         response.put("total_items", totalItems);
