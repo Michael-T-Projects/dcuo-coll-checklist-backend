@@ -2,6 +2,8 @@ package xyz.michaeltprojects.collchecklist.boundary.api.v1.security;
 
 import lombok.*;
 
+import java.util.Collection;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,5 +16,7 @@ public class AuthTokenDto {
     private String email;
 
     private String token;
+
+    private Collection<String> roles;
 
 }

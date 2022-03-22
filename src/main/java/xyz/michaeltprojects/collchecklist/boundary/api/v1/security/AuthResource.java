@@ -11,12 +11,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import xyz.michaeltprojects.collchecklist.security.control.Role;
 import xyz.michaeltprojects.collchecklist.security.control.User;
 import xyz.michaeltprojects.collchecklist.security.control.UserService;
 import xyz.michaeltprojects.collchecklist.security.util.TokenProvider;
 import xyz.michaeltprojects.collchecklist.shared.MessageResponseDto;
 
 import javax.validation.Valid;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -49,7 +51,7 @@ public class AuthResource {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        return ResponseEntity.ok(new AuthTokenDto(user.getUsername(), user.getEmail(), token));
+        return ResponseEntity.ok(new AuthTokenDto(user.getUsername(), user.getEmail(), token, user.getRoles().stream().map(Role::getName).collect(Collectors.toList())));
     }
 
     @PostMapping(path = "/signup", consumes = DEFAULT_MEDIA_TYPE, produces = DEFAULT_MEDIA_TYPE)
