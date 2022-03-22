@@ -1,5 +1,7 @@
 package xyz.michaeltprojects.collchecklist.persistence.collection;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,10 +10,10 @@ import java.util.Collection;
 @Repository
 public interface CollectionRepository extends JpaRepository<CollectionEntity, Long> {
 
-    Collection<CollectionEntity> findByCategoryId(long categoryId);
+    Page<CollectionEntity> findByCategoryId(long categoryId, Pageable pageable);
 
-    Collection<CollectionEntity> findByNameContaining(String name);
+    Page<CollectionEntity> findByNameContaining(String name, Pageable pageable);
 
-    Collection<CollectionEntity> findByCategoryIdAndNameContaining(long categoryId, String name);
+    Page<CollectionEntity> findByCategoryIdAndNameContaining(long categoryId, String name, Pageable pageable);
 
 }

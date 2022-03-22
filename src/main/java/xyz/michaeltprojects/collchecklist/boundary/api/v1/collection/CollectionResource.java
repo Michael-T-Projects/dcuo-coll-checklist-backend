@@ -31,7 +31,9 @@ public class CollectionResource {
     @GetMapping(produces = DEFAULT_MEDIA_TYPE)
     public ResponseEntity<?> findByCategoryId(
             @Valid @RequestParam(name = "category_id", required = false) final Long categoryId,
-            @Valid @RequestParam(name = "name", required = false) final String name
+            @Valid @RequestParam(name = "name", required = false) final String name,
+            @Valid @RequestParam(name = "page", required = false, defaultValue = "0") final int page,
+            @Valid @RequestParam(name = "size", required = false, defaultValue = "10") final int size
     ) {
         Collection<CollectionDto> collections;
 
@@ -40,15 +42,15 @@ public class CollectionResource {
                 return ResponseEntity.notFound().build();
             }
 
-            collections = service.findByCategoryIdAndNameContaining(categoryId, name).stream().map(mapper::map).collect(Collectors.toList());
+            collections = service.findByCategoryIdAndNameContaining(categoryId, name, page, size).stream().map(mapper::map).collect(Collectors.toList());
         } else if (categoryId != null) {
             if (!categoryService.existsById(categoryId)) {
                 return ResponseEntity.notFound().build();
             }
 
-            collections = service.findByCategoryId(categoryId).stream().map(mapper::map).collect(Collectors.toList());
+            collections = service.findByCategoryId(categoryId, page, size).stream().map(mapper::map).collect(Collectors.toList());
         } else if (name != null) {
-            collections = service.findByNameContaining(name).stream().map(mapper::map).collect(Collectors.toList());
+            collections = service.findByNameContaining(name, page, size).stream().map(mapper::map).collect(Collectors.toList());
         } else {
             collections = service.findAll().stream().map(mapper::map).collect(Collectors.toList());
         }

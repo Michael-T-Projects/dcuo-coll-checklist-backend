@@ -1,6 +1,8 @@
 package xyz.michaeltprojects.collchecklist.control.collection;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import xyz.michaeltprojects.collchecklist.persistence.collection.CollectionPartRepository;
 import xyz.michaeltprojects.collchecklist.persistence.collection.CollectionProgressRepository;
@@ -23,18 +25,21 @@ public class CollectionServiceImpl implements CollectionService {
     }
 
     @Override
-    public java.util.Collection<Collection> findByCategoryId(long categoryId) {
-        return repository.findByCategoryId(categoryId).stream().map(mapper::map).collect(Collectors.toList());
+    public java.util.Collection<Collection> findByCategoryId(long categoryId, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return repository.findByCategoryId(categoryId, pageable).stream().map(mapper::map).collect(Collectors.toList());
     }
 
     @Override
-    public java.util.Collection<Collection> findByNameContaining(String name) {
-        return repository.findByNameContaining(name).stream().map(mapper::map).collect(Collectors.toList());
+    public java.util.Collection<Collection> findByNameContaining(String name, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return repository.findByNameContaining(name, pageable).stream().map(mapper::map).collect(Collectors.toList());
     }
 
     @Override
-    public java.util.Collection<Collection> findByCategoryIdAndNameContaining(long categoryId, String name) {
-        return repository.findByCategoryIdAndNameContaining(categoryId, name).stream().map(mapper::map).collect(Collectors.toList());
+    public java.util.Collection<Collection> findByCategoryIdAndNameContaining(long categoryId, String name, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return repository.findByCategoryIdAndNameContaining(categoryId, name, pageable).stream().map(mapper::map).collect(Collectors.toList());
     }
 
     @Override

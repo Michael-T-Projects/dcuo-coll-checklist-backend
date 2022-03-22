@@ -4,11 +4,11 @@ public interface CollectionService {
 
     java.util.Collection<Collection> findAll();
 
-    java.util.Collection<Collection> findByCategoryId(long categoryId);
+    java.util.Collection<Collection> findByCategoryId(long categoryId, int page, int size);
 
-    java.util.Collection<Collection> findByNameContaining(String name);
+    java.util.Collection<Collection> findByNameContaining(String name, int page, int size);
 
-    java.util.Collection<Collection> findByCategoryIdAndNameContaining(long categoryId, String name);
+    java.util.Collection<Collection> findByCategoryIdAndNameContaining(long categoryId, String name, int page, int size);
 
     Collection save(Collection collection);
 
