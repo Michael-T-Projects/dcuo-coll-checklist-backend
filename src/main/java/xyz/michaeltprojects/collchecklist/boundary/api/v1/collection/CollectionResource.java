@@ -1,6 +1,7 @@
 package xyz.michaeltprojects.collchecklist.boundary.api.v1.collection;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,6 +14,8 @@ import xyz.michaeltprojects.collchecklist.control.collection.CollectionService;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -36,26 +39,52 @@ public class CollectionResource {
             @Valid @RequestParam(name = "size", required = false, defaultValue = "10") final int size
     ) {
         Collection<CollectionDto> collections;
+        int currentPage;
+        int totalPages;
+        long totalItems;
 
         if (categoryId != null && name != null) {
             if (!categoryService.existsById(categoryId)) {
                 return ResponseEntity.notFound().build();
             }
 
-            collections = service.findByCategoryIdAndNameContaining(categoryId, name, page, size).stream().map(mapper::map).collect(Collectors.toList());
+            Page<xyz.michaeltprojects.collchecklist.control.collection.Collection> collectionPage = service.findByCategoryIdAndNameContaining(categoryId, name, page, size);
+            collections = collectionPage.toList().stream().map(mapper::map).collect(Collectors.toList());
+            currentPage = collectionPage.getNumber();
+            totalPages = collectionPage.getTotalPages();
+            totalItems = collectionPage.getTotalElements();
         } else if (categoryId != null) {
             if (!categoryService.existsById(categoryId)) {
                 return ResponseEntity.notFound().build();
             }
 
-            collections = service.findByCategoryId(categoryId, page, size).stream().map(mapper::map).collect(Collectors.toList());
+            Page<xyz.michaeltprojects.collchecklist.control.collection.Collection> collectionPage = service.findByCategoryId(categoryId, page, size);
+            collections = collectionPage.toList().stream().map(mapper::map).collect(Collectors.toList());
+            currentPage = collectionPage.getNumber();
+            totalPages = collectionPage.getTotalPages();
+            totalItems = collectionPage.getTotalElements();
         } else if (name != null) {
-            collections = service.findByNameContaining(name, page, size).stream().map(mapper::map).collect(Collectors.toList());
+            Page<xyz.michaeltprojects.collchecklist.control.collection.Collection> collectionPage = service.findByNameContaining(name, page, size);
+            collections = collectionPage.toList().stream().map(mapper::map).collect(Collectors.toList());
+            currentPage = collectionPage.getNumber();
+            totalPages = collectionPage.getTotalPages();
+            totalItems = collectionPage.getTotalElements();
         } else {
-            collections = service.findAll().stream().map(mapper::map).collect(Collectors.toList());
+            Page<xyz.michaeltprojects.collchecklist.control.collection.Collection> collectionPage = service.findAll(page, size);
+            collections = collectionPage.toList().stream().map(mapper::map).collect(Collectors.toList());
+            currentPage = collectionPage.getNumber();
+            totalPages = collectionPage.getTotalPages();
+            totalItems = collectionPage.getTotalElements();
         }
 
-        return ResponseEntity.ok(collections);
+        Map<String, Object> response = new HashMap<>();
+
+        response.put("collections", collections);
+        response.put("current_page", currentPage);
+        response.put("total_pages", totalPages);
+        response.put("total_items", totalItems);
+
+        return ResponseEntity.ok(response);
     }
 
     @PreAuthorize("hasRole('ADMIN')")

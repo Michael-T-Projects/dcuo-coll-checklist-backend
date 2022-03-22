@@ -1,14 +1,16 @@
 package xyz.michaeltprojects.collchecklist.control.collection;
 
+import org.springframework.data.domain.Page;
+
 public interface CollectionService {
 
-    java.util.Collection<Collection> findAll();
+    Page<Collection> findAll(int page, int size);
 
-    java.util.Collection<Collection> findByCategoryId(long categoryId, int page, int size);
+    Page<Collection> findByCategoryId(long categoryId, int page, int size);
 
-    java.util.Collection<Collection> findByNameContaining(String name, int page, int size);
+    Page<Collection> findByNameContaining(String name, int page, int size);
 
-    java.util.Collection<Collection> findByCategoryIdAndNameContaining(long categoryId, String name, int page, int size);
+    Page<Collection> findByCategoryIdAndNameContaining(long categoryId, String name, int page, int size);
 
     Collection save(Collection collection);
 

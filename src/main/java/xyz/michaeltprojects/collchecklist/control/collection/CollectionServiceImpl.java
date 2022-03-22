@@ -1,6 +1,7 @@
 package xyz.michaeltprojects.collchecklist.control.collection;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,26 +21,27 @@ public class CollectionServiceImpl implements CollectionService {
     private final CollectionProgressRepository collectionProgressRepository;
 
     @Override
-    public java.util.Collection<Collection> findAll() {
-        return repository.findAll().stream().map(mapper::map).collect(Collectors.toList());
+    public Page<Collection> findAll(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return repository.findAll(pageable).map(mapper::map);
     }
 
     @Override
-    public java.util.Collection<Collection> findByCategoryId(long categoryId, int page, int size) {
+    public Page<Collection> findByCategoryId(long categoryId, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return repository.findByCategoryId(categoryId, pageable).stream().map(mapper::map).collect(Collectors.toList());
+        return repository.findByCategoryId(categoryId, pageable).map(mapper::map);
     }
 
     @Override
-    public java.util.Collection<Collection> findByNameContaining(String name, int page, int size) {
+    public Page<Collection> findByNameContaining(String name, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return repository.findByNameContaining(name, pageable).stream().map(mapper::map).collect(Collectors.toList());
+        return repository.findByNameContaining(name, pageable).map(mapper::map);
     }
 
     @Override
-    public java.util.Collection<Collection> findByCategoryIdAndNameContaining(long categoryId, String name, int page, int size) {
+    public Page<Collection> findByCategoryIdAndNameContaining(long categoryId, String name, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return repository.findByCategoryIdAndNameContaining(categoryId, name, pageable).stream().map(mapper::map).collect(Collectors.toList());
+        return repository.findByCategoryIdAndNameContaining(categoryId, name, pageable).map(mapper::map);
     }
 
     @Override
