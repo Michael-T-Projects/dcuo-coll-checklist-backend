@@ -16,12 +16,12 @@ import xyz.michaeltprojects.collchecklist.shared.MessageResponseDto;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/collection-progresses")
 @RequiredArgsConstructor
+@CrossOrigin(maxAge = 3600)
 public class CollectionProgressResource {
 
     private final static String DEFAULT_MEDIA_TYPE = MediaType.APPLICATION_JSON_VALUE;

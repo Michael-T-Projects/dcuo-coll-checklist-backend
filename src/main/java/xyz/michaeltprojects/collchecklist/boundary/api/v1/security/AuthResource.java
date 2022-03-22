@@ -21,6 +21,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
+@CrossOrigin(maxAge = 3600)
 public class AuthResource {
 
     private static final String DEFAULT_MEDIA_TYPE = MediaType.APPLICATION_JSON_VALUE;

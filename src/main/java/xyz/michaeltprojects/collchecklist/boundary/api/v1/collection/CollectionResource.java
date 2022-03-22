@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/collections")
 @RequiredArgsConstructor
+@CrossOrigin(maxAge = 3600)
 public class CollectionResource {
 
     private final static String DEFAULT_MEDIA_TYPE = MediaType.APPLICATION_JSON_VALUE;
