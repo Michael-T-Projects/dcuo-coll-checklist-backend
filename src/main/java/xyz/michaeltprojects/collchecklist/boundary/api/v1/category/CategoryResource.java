@@ -3,12 +3,10 @@ package xyz.michaeltprojects.collchecklist.boundary.api.v1.category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import xyz.michaeltprojects.collchecklist.control.category.CategoryServiceImpl;
 
+import javax.validation.Valid;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -26,6 +24,17 @@ public class CategoryResource {
     @GetMapping(produces = DEFAULT_MEDIA_TYPE)
     public ResponseEntity<Collection<CategoryDto>> findAll() {
         return ResponseEntity.ok(service.findAll().stream().map(mapper::map).collect(Collectors.toList()));
+    }
+
+    @GetMapping(path = "/{id}", produces = DEFAULT_MEDIA_TYPE)
+    public ResponseEntity<?> findById(@Valid @PathVariable("id") final long id) {
+        CategoryDto category = mapper.map(service.findById(id));
+
+        if (category == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(category);
     }
 
 }

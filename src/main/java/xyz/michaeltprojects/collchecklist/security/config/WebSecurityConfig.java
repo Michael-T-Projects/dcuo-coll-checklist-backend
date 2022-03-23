@@ -51,7 +51,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         HttpMethod.GET,
                         "/api/v1/collections",
                         "/api/v1/collections/**",
-                        "/api/v1/categories"
+                        "/api/v1/categories",
+                        "/api/v1/categories/**"
                 ).permitAll()
                 .anyRequest().authenticated()
                 .and()
