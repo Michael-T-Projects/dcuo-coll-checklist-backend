@@ -31,6 +31,17 @@ public class CollectionResource {
     private final CollectionDtoMapper mapper;
     private final CategoryDtoMapper categoryMapper;
 
+    @GetMapping(path = "/{id}", produces = DEFAULT_MEDIA_TYPE)
+    public ResponseEntity<?> findById(@Valid @PathVariable("id") final long id) {
+        CollectionDto collection = mapper.map(service.findById(id));
+
+        if (collection == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(collection);
+    }
+
     @GetMapping(produces = DEFAULT_MEDIA_TYPE)
     public ResponseEntity<?> findByCategoryId(
             @Valid @RequestParam(name = "category_id", required = false) final Long categoryId,
