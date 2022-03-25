@@ -20,6 +20,8 @@ public interface CollectionService {
 
     java.util.Collection<CollectionProgress> findByUserIdAndCollectionNameContaining(long userId, String collectionName);
 
+    java.util.Collection<CollectionProgress> findCollectionProgressesByUserId(long userId);
+
     CollectionProgress update(CollectionProgress collectionProgress);
 
     Collection findById(long id);

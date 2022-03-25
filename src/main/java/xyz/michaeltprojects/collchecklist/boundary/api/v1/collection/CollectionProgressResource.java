@@ -71,8 +71,8 @@ public class CollectionProgressResource {
     }
 
     @GetMapping(produces = DEFAULT_MEDIA_TYPE)
-    public ResponseEntity<?> findByCollectionNameContaining(
-            @Valid @RequestParam(name = "collection_name") final String collectionName
+    public ResponseEntity<?> findAll(
+            @Valid @RequestParam(name = "collection_name", required = false) final String collectionName
     ) {
         UserDetails currentUserDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = userService.findByUsername(currentUserDetails.getUsername());
@@ -81,9 +81,17 @@ public class CollectionProgressResource {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        Collection<CollectionProgressDto> collectionProgress = service
-                .findByUserIdAndCollectionNameContaining(currentUser.getId(), collectionName)
-                .stream().map(mapper::map).collect(Collectors.toList());
+        Collection<CollectionProgressDto> collectionProgress;
+
+        if (collectionName == null) {
+            collectionProgress = service
+                    .findCollectionProgressesByUserId(currentUser.getId())
+                    .stream().map(mapper::map).collect(Collectors.toList());
+        } else {
+            collectionProgress = service
+                    .findByUserIdAndCollectionNameContaining(currentUser.getId(), collectionName)
+                    .stream().map(mapper::map).collect(Collectors.toList());
+        }
 
         return ResponseEntity.ok(collectionProgress);
     }

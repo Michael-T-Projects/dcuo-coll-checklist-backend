@@ -68,6 +68,11 @@ public class CollectionServiceImpl implements CollectionService {
     }
 
     @Override
+    public java.util.Collection<CollectionProgress> findCollectionProgressesByUserId(long userid) {
+        return collectionProgressRepository.findByUserId(userid).stream().map(mapper::map).collect(Collectors.toList());
+    }
+
+    @Override
     public CollectionProgress update(CollectionProgress collectionProgress) {
         return mapper.map(collectionProgressRepository.save(mapper.map(collectionProgress)));
     }

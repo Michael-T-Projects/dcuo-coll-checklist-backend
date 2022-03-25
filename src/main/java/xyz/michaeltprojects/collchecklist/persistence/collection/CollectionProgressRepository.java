@@ -12,4 +12,6 @@ public interface CollectionProgressRepository extends JpaRepository<CollectionPr
 
     CollectionProgressEntity findByUserIdAndCollectionId(long userId, long collectionId);
 
+    Collection<CollectionProgressEntity> findByUserId(long userId);
+
 }
