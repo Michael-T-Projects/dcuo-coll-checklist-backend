@@ -11,6 +11,8 @@ import java.util.Collection;
 @Setter
 public class AuthTokenDto {
 
+    private long id;
+
     private String username;
 
     private String email;

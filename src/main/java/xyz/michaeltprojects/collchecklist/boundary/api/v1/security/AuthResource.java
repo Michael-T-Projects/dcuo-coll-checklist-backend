@@ -65,7 +65,7 @@ public class AuthResource {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        return ResponseEntity.ok(new AuthTokenDto(user.getUsername(), user.getEmail(), token, user.getRoles().stream().map(Role::getName).collect(Collectors.toList())));
+        return ResponseEntity.ok(new AuthTokenDto(user.getId(), user.getUsername(), user.getEmail(), token, user.getRoles().stream().map(Role::getName).collect(Collectors.toList())));
     }
 
     @PostMapping(path = "/signup", consumes = DEFAULT_MEDIA_TYPE, produces = DEFAULT_MEDIA_TYPE)
