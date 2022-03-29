@@ -20,11 +20,11 @@ public class CollectionDto {
     private Long id;
 
     @NotBlank
-    @Size(min = 2, max = 30)
+    @Size(min = 2, max = 100)
     private String name;
 
     @NotBlank
-    @Size(min = 2, max = 30)
+    @Size(min = 2, max = 100)
     private String reward;
 
     private String location;
