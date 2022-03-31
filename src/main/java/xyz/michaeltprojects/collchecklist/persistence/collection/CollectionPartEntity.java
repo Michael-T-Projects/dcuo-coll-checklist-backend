@@ -22,7 +22,7 @@ public class CollectionPartEntity {
     private long id;
 
     @NotBlank
-    @Size(min = 2, max = 30)
+    @Size(min = 2, max = 100)
     @Column(nullable = false)
     private String name;
 
